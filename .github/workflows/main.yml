@@ -43,12 +43,14 @@ jobs:
 
       # 4) (Optional) IaC scan
       - name: Terraform fmt & validate
-        if: fileExists('infra/')
         run: |
-          cd infra
-          terraform fmt -check
-          terraform validate
-
+          if [ -d infra ]; then
+            cd infra
+            terraform fmt -check
+            terraform validate
+          else
+            echo "infra/ not found — skipping Terraform scan"
+          fi
       # 5) Push artifact or deploy to staging
       - name: Publish Docker image
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
