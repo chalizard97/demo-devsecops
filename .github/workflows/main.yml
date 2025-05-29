@@ -39,10 +39,15 @@ jobs:
         with:
           upload: true
       - name: Install CodeQL
-        run: |
-          curl -L -o codeql-cli.tar.gz https://github.com/github/codeql-cli-binaries/releases/latest/download/codeql-linux64.tar.gz
-          tar -xzf codeql-cli.tar.gz
-          mv codeql /usr/local/bin/codeql
+          run: |
+            curl -L -o codeql-cli.tar.gz https://github.com/github/codeql-cli-binaries/releases/latest/download/codeql-linux64.tar.gz
+            if file codeql-cli.tar.gz | grep -q gzip; then
+              tar -xzf codeql-cli.tar.gz
+            else
+              echo "Downloaded file is not in gzip format" >&2
+              exit 1
+            fi
+            mv codeql /usr/local/bin/codeql
       - name: Export SARIF diagnostics
         run: |
           codeql database export-diagnostics ./codeql_databases --db-cluster \
