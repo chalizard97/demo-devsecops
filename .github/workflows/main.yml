@@ -14,6 +14,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions: inherit
     steps:
       - uses: actions/checkout@v3
 
@@ -37,6 +38,13 @@ jobs:
 
       - name: Run CodeQL queries
         uses: github/codeql-action/analyze@v3
+        with:
+          sarif: true
+          upload: true
+      - name: Export SARIF diagnostics
+        run: |
+          codeql database export-diagnostics ./codeql_databases --db-cluster \
+          --format=sarif-latest --output=./codeql-diagnostics.sarif
 
       # 3) Container image build & scan
       - name: Build Docker Image
