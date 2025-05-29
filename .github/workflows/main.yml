@@ -22,11 +22,14 @@ jobs:
         run: yarn test
 
       # 2) CodeQL analysis
+      # 2) CodeQL analysis
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
-        with: languages: javascript
+        with:
+          languages: javascript
       - name: Autobuild
         uses: github/codeql-action/autobuild@v2
+
       - name: Run CodeQL queries
         uses: github/codeql-action/analyze@v2
 
