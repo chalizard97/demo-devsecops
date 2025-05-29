@@ -1,5 +1,5 @@
 const http = require('http');
 const PORT = process.env.PORT || 3333;
 http.createServer((req, res) => {
-  res.end('Hello from DevSecOps Demo! Test');
+  res.end('Hello from DevSecOps Demo!');
 }).listen(PORT, () => console.log(`Listening on ${PORT}`));
