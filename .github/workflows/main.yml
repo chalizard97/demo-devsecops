@@ -26,6 +26,11 @@ jobs:
       - name: Run unit tests
         run: yarn test
 
+        
+      - name: Scan for secrets
+        uses: zricethezav/gitleaks-action@v8
+        with:
+          args: --path=. --verbose
       # 2) CodeQL analysis
       # 2) CodeQL analysis
       - name: Initialize CodeQL

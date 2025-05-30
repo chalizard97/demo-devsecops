@@ -2,5 +2,6 @@
 module.exports = {
     dbPassword: 'vseC@2025a',       // Secret scanning should catch this
     apiKey: 'sk_test_51HxxxxxFakeKey', 
-    DATABASE_PASSWORD2: 'vsec@2024'
+    DATABASE_PASSWORD2: 'vsec@2024',
+    dbPassword2: 'P@ssw0rd!123',
   };
